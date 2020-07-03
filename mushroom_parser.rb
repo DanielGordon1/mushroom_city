@@ -16,7 +16,10 @@ class MushRoomParser
 
   def initialize(file_name)
     @file_name = file_name
+    count_shrooms
   end
+
+  private
 
   def count_shrooms
     counted_shrooms = {}
