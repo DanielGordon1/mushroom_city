@@ -1,8 +1,9 @@
 require 'sinatra'
 require_relative 'mushroom_parser.rb'
 
-get '/shrooms' do
-  @result = MushRoomParser.new('./agaricus-lepiota.data')
+get '/shrooms/:file_name' do
+  @result = MushRoomParser.new("./#{params[:file_name]}")
+                          .shrooms
 
   erb :index
 end
