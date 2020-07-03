@@ -25,7 +25,12 @@ class MushRoomParser
       color = LETTERS_TO_COLOR[row[3].to_sym]
       edible = row[0] == 'e'
 
-      counted_shrooms[color] = Hash.new(0) unless counted_shrooms[color]
+      if counted_shrooms[color].nil?
+        counted_shrooms[color] = {
+          'edible' =>  0,
+          'non_edible' => 0
+        }
+      end
 
       if edible
         counted_shrooms[color]['edible'] += 1
