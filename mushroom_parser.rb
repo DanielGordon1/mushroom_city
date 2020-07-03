@@ -1,6 +1,8 @@
 require 'csv'
 
 class MushRoomParser
+  attr_reader :shrooms
+
   LETTERS_TO_COLOR = {
     n: 'brown',
     b: 'buff',
@@ -16,7 +18,7 @@ class MushRoomParser
 
   def initialize(file_name)
     @file_name = file_name
-    count_shrooms
+    @shrooms = File.exist?(file_name) ? count_shrooms : { error: 'File does not exist'}
   end
 
   private
