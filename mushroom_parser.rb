@@ -33,9 +33,11 @@ class MushRoomParser
       color = LETTERS_TO_COLOR[row[3].to_sym]
       edible = row[0] == 'e'
 
+      # We could alternatively use an OpenStruct here to mimic a regular object interface.
+      # Its slower when doing lookup operations though, so lets stay with our more performant hash for now.
       counted_shrooms[color] = { edible: 0, non_edible: 0 } if counted_shrooms[color].nil?
 
-      edible ? counted_shrooms[color][:edible] += 1 : counted_shrooms[color]['non_edible'] += 1
+      edible ? counted_shrooms[color][:edible] += 1 : counted_shrooms[color][:non_edible] += 1
     end
     counted_shrooms
   end
