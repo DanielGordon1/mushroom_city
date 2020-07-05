@@ -13,3 +13,9 @@ get '/shrooms' do
 
   erb :index
 end
+
+if ENV['RACK_ENV'] == 'production'
+  get '*' do
+    redirect '/'
+  end
+end
