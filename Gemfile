@@ -1,5 +1,7 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-gem "sinatra"
-gem "sinatra-contrib"
-gem "rubocop"
+source 'https://rubygems.org'
+
+gem 'rubocop'
+gem 'sinatra'
+gem 'sinatra-contrib'
