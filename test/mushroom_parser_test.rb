@@ -15,7 +15,7 @@ class MushRoomParserTest < Minitest::Test
     assert_equal({ error: 'File does not exist' }, service.shrooms)
   end
 
-  def test_it_returns_a_hash_shroom_data_for_valid_file_names
+  def test_it_returns_a_hash_of_shroom_data_for_valid_file_names
     service = MushRoomParser.new(file_name: 'agaricus-lepiota.data')
     assert_equal({ edible: 1264, non_edible: 1020 }, service.shrooms['brown'])
   end
