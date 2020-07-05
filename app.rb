@@ -3,7 +3,11 @@
 require 'sinatra'
 require_relative 'mushroom_parser.rb'
 
-get '/shrooms/:file_name' do
+get '/' do
+  erb :home
+end
+
+get '/shrooms' do
   @result = MushRoomParser.new("./#{params[:file_name]}")
                           .shrooms
 
