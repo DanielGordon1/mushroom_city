@@ -3,7 +3,6 @@
 require_relative '../services/mushroom_parser.rb'
 
 require 'minitest/autorun'
-require 'pry'
 
 class MushRoomParserTest < Minitest::Test
   def test_it_raises_an_error_when_not_passed_named_argument
