@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'csv'
+require 'pry'
 
 # Service that takes a file_name and returns a hash of mushroom data.
 class MushRoomParser
@@ -20,8 +21,8 @@ class MushRoomParser
   }.freeze
 
   def initialize(file_name:)
-    @file_name = file_name
-    @shrooms = File.exist?(file_name) ? count_shrooms : { error: 'File does not exist' }
+    @file_name = File.join(__dir__, "../data/#{file_name}")
+    @shrooms = File.exist?(@file_name) ? count_shrooms : { error: 'File does not exist' }
   end
 
   private
