@@ -19,9 +19,9 @@ class MushRoomParser
     y: 'yellow'
   }.freeze
 
-  def initialize(file_name:)
-    @file_name = File.join(__dir__, "../data/#{file_name}")
-    @shrooms = File.exist?(@file_name) ? count_shrooms : { error: 'File does not exist' }
+  def initialize(file_name)
+    @file_name = file_name
+    @shrooms = File.exist?(file_name) ? count_shrooms : { error: 'File does not exist' }
   end
 
   private
