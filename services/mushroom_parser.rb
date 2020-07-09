@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'csv'
-require 'uri'
 require 'open-uri'
 
 # Service that takes a file_name and returns a hash of mushroom data.
@@ -24,7 +23,7 @@ class MushRoomParser
   def initialize(file_name:)
     @file_name = file_name
     @handler = @file_name.scan(URI::DEFAULT_PARSER.make_regexp).any? ? 'remote' : 'local'
-    @shrooms = send("parse_#{handler}_file")
+    @shrooms = send("parse_#{@handler}_file")
   end
 
   private
