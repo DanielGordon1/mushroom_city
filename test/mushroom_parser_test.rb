@@ -1,8 +1,11 @@
 # frozen_string_literal: true
+require 'pry'
 
 require_relative '../services/mushroom_parser.rb'
 
 require 'minitest/autorun'
+
+URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/mushroom/agaricus-lepiota.data'
 
 class MushRoomParserTest < Minitest::Test
   def test_it_raises_an_error_when_not_passed_named_argument
@@ -17,6 +20,11 @@ class MushRoomParserTest < Minitest::Test
 
   def test_it_returns_a_hash_of_shroom_data_for_valid_file_names
     service = MushRoomParser.new(file_name: 'agaricus-lepiota.data')
+    assert_equal({ edible: 1264, non_edible: 1020 }, service.shrooms['brown'])
+  end
+
+  def test_it_returns_a_hash_of_shroom_data_for_a_valid_url
+    service = MushRoomParser.new(file_name: URL)
     assert_equal({ edible: 1264, non_edible: 1020 }, service.shrooms['brown'])
   end
 
