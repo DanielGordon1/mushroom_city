@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'csv'
+require 'uri'
+require 'open-uri'
 
 # Service that takes a file_name and returns a hash of mushroom data.
 class MushRoomParser
@@ -20,16 +22,27 @@ class MushRoomParser
   }.freeze
 
   def initialize(file_name:)
-    @file_name = File.join(__dir__, "../data/#{file_name}")
-    @shrooms = File.exist?(@file_name) ? count_shrooms : { error: 'File does not exist' }
+    @file_name = file_name
+    @handler = @file_name.scan(URI::DEFAULT_PARSER.make_regexp).any? ? 'remote' : 'local'
+    @shrooms = send("parse_#{handler}_file")
   end
 
   private
 
+  def parse_remote_file
+    @file = URI.open(@file_name)
+    count_shrooms
+  end
+
+  def parse_local_file
+    @file = File.join(__dir__, "../data/#{@file_name}")
+    File.exist?(@file) ? count_shrooms : { error: 'File does not exist' }
+  end
+
   def count_shrooms
     counted_shrooms = {}
 
-    CSV.foreach(@file_name) do |row|
+    CSV.foreach(@file) do |row|
       color = LETTERS_TO_COLOR[row[3].to_sym]
       edible = row[0] == 'e'
 
