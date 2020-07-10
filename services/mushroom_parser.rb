@@ -22,7 +22,7 @@ class MushRoomParser
 
   def initialize(file_name:)
     @file_name = file_name
-    @handler = @file_name.scan(URI::DEFAULT_PARSER.make_regexp).any? ? 'remote' : 'local'
+    @handler = URI::DEFAULT_PARSER.make_regexp.match?(@file_name) ? 'remote' : 'local'
     @shrooms = send("parse_#{@handler}_file")
   end
 
